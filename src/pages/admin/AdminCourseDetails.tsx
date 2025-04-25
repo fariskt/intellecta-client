@@ -6,6 +6,7 @@ import { ArrowLeft, Edit, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { fetchCourseDetails } from "./services/services";
 import AllStudentsLoader from "../../utils/ui/allStudentsLoader";
+import axiosInstance from "../../utils/axiosInstance";
 
 interface Lesson {
   _id: string;
@@ -38,10 +39,9 @@ const AdminCourseDetailsPage = () => {
   });
 
   const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this course?")) {
       try {
-        setIsDeleting(true);
-        await axios.delete(`http://localhost:5005/api/courses/${courseId}`);
+        const res = await axiosInstance.patch(`http://localhost:5005/api/courses/deleteCourse/${courseId}`);
+        console.log("dddd ",res.data)
         navigate("/admin/courses");
       } catch (error) {
         console.error("Failed to delete course:", error);
@@ -49,7 +49,7 @@ const AdminCourseDetailsPage = () => {
       } finally {
         setIsDeleting(false);
       }
-    }
+    
   };
 
   const handleEdit = () => {

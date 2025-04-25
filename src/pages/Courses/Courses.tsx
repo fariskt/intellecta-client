@@ -63,21 +63,23 @@ const Courses = () => {
     return response.data.data || [];
   };
 
-  const { data: initialCourses = [], isLoading, error } = useQuery<Course[]>({
+  const { data: initialCourses = [], isLoading, error } = useQuery({
     queryKey: ["courses", category],
     queryFn: fetchCourses,
     enabled: !!category,
-    staleTime: 5 * 60 * 1000,
+    // staleTime: 5 * 60 * 1000,
   });
+  console.log(initialCourses);
+  
 
   const { data: progressData, isLoading: isProgressLoading } =
     useQuery<ProgressMap>({
-      queryKey: ["courseProgress", initialCourses.map((course) => course._id)],
+      queryKey: ["courseProgress",  initialCourses?.courses?.map((course:Course) => course._id)],
       queryFn: async () => {
         const progressResults = await Promise.allSettled(
-          initialCourses.map((course) => fetchCourseProgress(course._id))
+          initialCourses.map((course:Course) => fetchCourseProgress(course._id))
         );
-        return initialCourses.reduce<ProgressMap>((acc, course, index) => {
+        return initialCourses.reduce((acc:any, course:Course, index:number) => {
           const result = progressResults[index];
           if (result.status === "fulfilled") {
             acc[course._id] = result.value;
@@ -97,7 +99,7 @@ const Courses = () => {
     if (query.trim() === "") {
       setFilteredCourses([]); // Reset to show all courses when query is empty
     } else {
-      const filtered = initialCourses.filter((course) =>
+      const filtered = initialCourses.filter((course:Course) =>
         course.title.toLowerCase().includes(query.toLowerCase()) || course.description.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredCourses(filtered);
@@ -108,8 +110,10 @@ const Courses = () => {
     setFilteredCourses(courses);
   };
 
-  const displayedCourses =
-    filteredCourses.length > 0 ? filteredCourses : initialCourses;
+  const displayedCourses = filteredCourses.length > 0 ? filteredCourses : initialCourses;
+  console.log("displated ",displayedCourses);
+  
+  
 
   if (isLoading || isProgressLoading) {
     return (
@@ -178,7 +182,7 @@ const Courses = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 sm:mt-8">
-            {displayedCourses.map((item: Course) => {
+            {displayedCourses.courses?.map((item: Course) => {
               const progress = progressData[item._id];
               const progressPercentage = progress ? progress.progressPercent : 0;
               return (
