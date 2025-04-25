@@ -40,11 +40,11 @@ const UserDashNav = ({ setString ,string }: UserDashNavProps) => {
     //   name: "AI Support",
     //   link: "/ai-support"
     // },
-    {
-      icon: <Library size={20} />,
-      name: "Resources",
-      link: "/resources"
-    },
+    // {
+    //   icon: <Library size={20} />,
+    //   name: "Resources",
+    //   link: "/resources"
+    // },
     // {
     //   icon: <Gift size={20} />,
     //   name: "Rewards",

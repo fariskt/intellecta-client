@@ -190,7 +190,7 @@ const Courses = () => {
                   key={item._id}
                   className="flex flex-col w-full bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 hover:shadow-violet-400/40"
                 >
-                  <Link to={`/course/${item.title.replace(/\s+/g, "-")}/${item._id}`}>
+                  <Link to={`/course/${category}/${item.title.replace(/\s+/g, "-")}/${item._id}`}>
                     <div className="relative w-full h-44">
                       <img
                         src={item.thumbnail || "/welcome-bg.png"}

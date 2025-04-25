@@ -60,7 +60,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/courses/:category" element={<Courses />} />
-          <Route path="/course/:courseTitle/:id" element={<Lessons />} />
+          <Route path="/course/:category/:courseTitle/:id" element={<Lessons />} />
           <Route path="/lesson/:lessonTitle/:lessonId" element={<LessonContent />}/>
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/course/quiz/:courseId" element={<LessonQuiz />} />

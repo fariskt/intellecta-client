@@ -13,6 +13,7 @@ import axios from "axios";
 type Params = {
   id: string;
   courseTitle: string;
+  category:string;
 };
 
 type ProgressData = {
@@ -29,7 +30,7 @@ type ProgressData = {
 };
 
 const Lessons = () => {
-  const { id = "", courseTitle = "" } = useParams<Params>();
+  const { id = "", courseTitle = "",category= "" } = useParams<Params>();
   const navigate = useNavigate();
 
   const fetchCourseProgress = async () => {
@@ -113,7 +114,7 @@ const Lessons = () => {
           <div className="flex items-center gap-3 sm:gap-5">
             <button
               className="text-xl sm:text-3xl text-gray-700 hover:text-gray-900"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(`/courses/${category}`)}
               aria-label="Go back"
             >
               <IoArrowBack className="text-black" />

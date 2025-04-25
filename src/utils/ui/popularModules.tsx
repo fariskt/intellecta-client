@@ -34,7 +34,14 @@ import {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="title" />
+              <XAxis 
+                dataKey="title" 
+                interval={0}
+                angle={-45} 
+                textAnchor="end" 
+                height={60}
+                className="text-xs"
+              />
               <YAxis />
               <Tooltip />
               <Bar dataKey="userCount" fill="#10B981" />

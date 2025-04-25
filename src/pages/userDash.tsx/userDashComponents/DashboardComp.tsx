@@ -85,9 +85,9 @@ const DashboardComp = () => {
               <BarChart />
             </div>
             {/* line graph */}
-            <div className="  md:w-[40rem] ">
+            {/* <div className="  md:w-[40rem] ">
               <LineChart  />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

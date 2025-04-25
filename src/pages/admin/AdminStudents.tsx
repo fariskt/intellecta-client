@@ -144,12 +144,12 @@ const AdminStudents = () => {
                   <td className="p-4">{student.phone}</td>
                   <td className="p-4">active</td>
                   <td className="p-4 text-center">
-                    <button
+                    <div
                       className="text-red-500 hover:text-red-700 transition font-medium"
                       onClick={() => handleDelete(student._id)}
                     >
                       <DeleteButton />
-                    </button>
+                    </div>
                   </td>
                 </tr>
               ))}
