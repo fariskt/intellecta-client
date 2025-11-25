@@ -11,22 +11,21 @@ import { userEndPoints } from "../../api/endPoints/userEndPoints";
 import { GoogleLogin } from "@react-oauth/google";
 
 
-  type Maybe<T> = T | null | undefined;
+// Updated type definition
+type RegisterFormData = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  age?: string;
+  phone?: string;
+  password?: string;
+};
 
-  // Updated type definition
-  type RegisterFormData = {
-  firstname: string;
-  lastname?: Maybe<string>; // Optional field
-  email: string;
-  age: string;
-  phone: string;
-  password: string;
-  };
 
 // Updated validation schema
 const validationSchema = yup.object().shape({
   firstname: yup.string().required("First name is required!"),
-  lastname: yup.string().notRequired(),
+  lastname: yup.string().optional(),
   email: yup
     .string()
     .email("This is not a valid email format!")
@@ -60,17 +59,19 @@ const Signup = () => {
     try {
       console.log("submitting", values);
       const response = await axiosInstance.post(
-        userEndPoints.USER.REGISTER, 
+        userEndPoints.USER.REGISTER,
         values,
         { headers: { "Content-Type": "application/json" } }
       );
       console.log("Registration success:", response);
-      localStorage.setItem("isAuthenticated","true")
+      localStorage.setItem("isAuthenticated", "true");
       toast.success("You're officially registered 🎉");
       navigate("/welcome");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Error during registration:", error);
-      const errorMessage = error.response?.data?.message || "Error registering user";
+      const errorMessage =
+        error.response?.data?.message || "Error registering user";
       toast.error(errorMessage);
     }
   };
@@ -97,9 +98,11 @@ const Signup = () => {
               Transform the Way You Learn!
             </h2>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-full">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col items-center w-full"
+          >
             <div className="flex flex-col gap-6 md:gap-10 w-full mt-8">
-
               {/* First & Last Name */}
               <div className="flex flex-col md:flex-row gap-6 md:gap-16 w-full">
                 <div className="w-full md:w-[250px]">
@@ -110,7 +113,9 @@ const Signup = () => {
                     {...register("firstname")}
                   />
                   {errors.firstname && (
-                    <p className="text-red-500 text-xs">{errors.firstname.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.firstname.message}
+                    </p>
                   )}
                 </div>
                 <div className="w-full md:w-[250px]">
@@ -133,7 +138,9 @@ const Signup = () => {
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-xs">{errors.email.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
                 <div className="w-full md:w-[250px]">
@@ -159,7 +166,9 @@ const Signup = () => {
                     {...register("phone")}
                   />
                   {errors.phone && (
-                    <p className="text-red-500 text-xs">{errors.phone.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.phone.message}
+                    </p>
                   )}
                 </div>
                 <div className="w-full md:w-[250px]">
@@ -170,14 +179,18 @@ const Signup = () => {
                     {...register("password")}
                   />
                   {errors.password && (
-                    <p className="text-red-500 text-xs">{errors.password.message}</p>
+                    <p className="text-red-500 text-xs">
+                      {errors.password.message}
+                    </p>
                   )}
                 </div>
               </div>
             </div>
 
             <div className="mt-8 w-full p-2 shadow-[4px_4px_10px_rgba(0,0,0,0.4)] text-center bg-white rounded-4xl font-semibold md:w-[300px]">
-              <button type="submit" className="text-base cursor-pointer">Join Now</button>
+              <button type="submit" className="text-base cursor-pointer">
+                Join Now
+              </button>
             </div>
             <div className="flex gap-2 mt-2">
               <h4 className="font-medium">Already have an account ?</h4>
@@ -187,21 +200,24 @@ const Signup = () => {
             </div>
             <h3 className="font-semibold">-OR-</h3>
             <div className="mt-2">
-            <GoogleLogin
+              <GoogleLogin
                 onSuccess={async (credentialResponse) => {
-                  const post = await axiosInstance.post("/user/google-login", credentialResponse);
+                  const post = await axiosInstance.post(
+                    "/user/google-login",
+                    credentialResponse
+                  );
                   const user = post.data.data;
                   console.log("post user", user);
-                  localStorage.setItem("isAuthenticated","true")
+                  localStorage.setItem("isAuthenticated", "true");
                   navigate("/welcome");
                 }}
                 onError={() => console.log("Login Failed")}
-                theme="outline"   
-                text="continue_with"  
-                shape="pill"          
+                theme="outline"
+                text="continue_with"
+                shape="pill"
                 width="300px"
               />
-        </div>
+            </div>
             <h4 className="font-medium mt-2 text-center">
               Join Intellecta & Unlock Your Potential!
             </h4>

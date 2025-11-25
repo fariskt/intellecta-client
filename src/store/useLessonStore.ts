@@ -46,7 +46,7 @@ export const useLessonStore = create<LessonStore>((set, get) => ({
     return totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   },
 
-  resetLessons: (courseId: string) => {
+  resetLessons: () => {
     // set(() => ({
     //   lessonData: {
     //     ...get().lessonData,

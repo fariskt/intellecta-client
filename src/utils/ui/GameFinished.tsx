@@ -7,7 +7,7 @@ interface GameWinnerProps {
   gameScore:number
 }
 
-const GameWinner : React.FC<GameWinnerProps> = ({ gameName = "", gameScore =0 }) => {
+const GameWinner : React.FC<GameWinnerProps> = ({ gameScore =0 }) => {
   return (
     <div className="absolute z-50 left-0 top-0 w-screen min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1a1a40] via-[#301934] to-[#0f0c29] text-white p-6 overflow-hidden">
          <Link to="/games/allgames">
