@@ -48,6 +48,12 @@ type DockItemProps = {
   href: string;
 };
 
+type DockLabelProps = {
+  className?: string;
+  children: React.ReactNode;
+  isHovered?: MotionValue<number>;
+};
+
 function DockItem({
   children,
   className = "",
@@ -80,10 +86,7 @@ function DockItem({
     <Link to={href}>
       <motion.div
         ref={ref}
-        style={{
-          width: size,
-          height: size,
-        }}
+        style={{ width: size, height: size }}
         onHoverStart={() => isHovered.set(1)}
         onHoverEnd={() => isHovered.set(0)}
         onFocus={() => isHovered.set(1)}
@@ -91,27 +94,28 @@ function DockItem({
         className={`relative inline-flex items-center justify-center rounded-full bg-[#060606] border-neutral-700 border-2 shadow-md ${className}`}
         tabIndex={0}
         role="button"
-        aria-haspopup="true"
       >
-        {Children.map(children, (child) =>
-          cloneElement(child as React.ReactElement)
-        )}
+        {Children.map(children, (child) => {
+          if (!React.isValidElement(child)) return child;
+
+          if (child.type === DockLabel) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return cloneElement(child as React.ReactElement<any>, { isHovered });
+          }
+
+          return child; // DockIcon stays unchanged
+        })}
       </motion.div>
     </Link>
   );
 }
-
-type DockLabelProps = {
-  className?: string;
-  children: React.ReactNode;
-};
 
 function DockLabel({ children, className = "", ...rest }: DockLabelProps) {
   const { isHovered } = rest as { isHovered: MotionValue<number> };
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = isHovered.on("change", (latest) => {
+    const unsubscribe = isHovered?.on("change", (latest) => {
       setIsVisible(latest === 1);
     });
     return () => unsubscribe();
