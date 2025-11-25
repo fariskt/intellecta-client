@@ -8,12 +8,13 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axiosInstance";
 import { userEndPoints } from "../../api/endPoints/userEndPoints";
 import DockLid from "./gameNav/DockLid";
-import violetemerald from "../../assets/game/violet-emerald.png";
+import violetemerald from "/game/violet-emerald.png";
 import "./Games.css";
 import axios from "axios";
+import { gamesLocal } from "../../utils/games";
 
 const GamesLayout = () => {
-  const { fetchGames, fetchLeaderboard, games } = useGameStore();
+  const { fetchGames, fetchLeaderboard } = useGameStore();
   const { setUser, user } = useAuthStore();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -58,7 +59,7 @@ const GamesLayout = () => {
   }, [user]);
 
   const [searchVal, setSearchVal] = useState("");
-  const searchedGames = games.filter((game) =>
+  const searchedGames = gamesLocal.filter((game) =>
     game.name.toLowerCase().includes(searchVal.toLocaleLowerCase())
   );
 

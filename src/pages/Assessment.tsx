@@ -143,7 +143,7 @@ const Assessment = () => {
         </div>
       )}
       
-      <div className="max-w-full px-4 pb-4 md:mx-20 lg:mx-36">
+      <div className="max-w-full px-4 pb-4 md:mx-20 lg:mx-36 mt-16">
         <h2 className="text-xl md:text-2xl font-bold mt-8 text-center">Your Initial Assessment</h2>
         <div className="flex flex-col sm:flex-row items-center mt-4 md:mt-8 gap-4 md:gap-16">
           <div className="bg-[#349EFF] text-white rounded-md px-2 py-1 md:px-3 md:py-2 font-semibold">

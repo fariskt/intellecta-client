@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import  gamebg4 from "../../../assets/game/test4.png";
+import gamebg4 from "/game/test4.png";
 import { useGameStore } from "../../../store/useGameStore";
 import GameFooter from "./GameFooter";
 import LeaderboardPreview from "./LeaderboardPreview";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../store/useAuthStore";
 import PlayNow from "../Games/PlayNow";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { gamesLocal } from "../../../utils/games";
 
 export const showToast = () => {
   toast.warn(
@@ -24,7 +25,6 @@ export const showToast = () => {
 
 const GameHome = () => {
   const {
-    games,
     leaderboard,
     showPlayNow,
     setShowPlayNow,
@@ -33,11 +33,11 @@ const GameHome = () => {
   const { user } = useAuthStore();
   const navigate = useNavigate();
 
-
   const { data: recentgame } = useQuery({
     queryKey: ["recentgame"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5002/api/games/latest/recent-game",
+      const res = await axios.get(
+        "http://localhost:5002/api/games/latest/recent-game",
         { withCredentials: true }
       );
       const games = res.data.games;
@@ -47,10 +47,6 @@ const GameHome = () => {
   });
 
   const startGame = (slug: string) => {
-    if (!user) {
-      showToast();
-      return
-    }
     setShowPlayNow(true);
     setShowPlayNow(false);
     navigate(`/games/${slug}/`);
@@ -62,7 +58,7 @@ const GameHome = () => {
       <div className="p-5 md:mx-36">
         <div className="flex flex-col md:flex-row md:justify-between  mt-10">
           <div className="max-w-md space-y-3">
-            <h3 className="text-violet-800 text-lg font-bold">
+            <h3 className="text-violet-800 text-lg md:text-4xl font-bold">
               EXPLORE OUR GAMES
             </h3>
             <h1 className="md:text-6xl text-4xl  text-white font-semibold">
@@ -84,10 +80,10 @@ const GameHome = () => {
             </Link>
           </div>
           <motion.div
-          initial={{ x: "2%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 1 }}
-          exit={{ x: "20%", opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+            initial={{ x: "2%", opacity: 0 }}
+            animate={{ x: "0%", opacity: 1 }}
+            exit={{ x: "20%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <img
               src={gamebg4}
@@ -144,7 +140,7 @@ const GameHome = () => {
           </div>
           <div className="">
             <div className="grid grid-cols-2 md:grid-cols-3 md:gap-8 gap-5">
-              {games?.map((item) => (
+              {gamesLocal?.map((item) => (
                 <div onClick={() => startGame(item.slug)}>
                   <img
                     src={item.thumbnailImg}

@@ -55,9 +55,7 @@ export const fetchCourses = async () =>{
   return response.data.data;
 }
 
-export const fetchAdminDashboard = async ({
-    
-} = {}) => {
+export const fetchAdminDashboard = async () => {
   const response = await axiosInstance.get("http://localhost:5006/api/admin/adminDashboard");
   console.log(response.data)
   return response.data
@@ -92,7 +90,7 @@ export const fetchCourseDetails = async (courseId: string): Promise<CourseDetail
   console.log("details....", response.data.data);
   return response.data.data ||[];
 };
-export const deleteuser = async (userId: String) => {
+export const deleteuser = async (userId: string) => {
   console.log("deleteuser:", userId)
   const response = await axiosInstance.post("http://localhost:5000/api/user/delete-user", userId)
   console.log(response.data)

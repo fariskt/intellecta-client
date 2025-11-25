@@ -7,19 +7,14 @@ interface Props {
   onSelect: (studentId: string, name?: string, email?: string) => void;
 }
 
-interface Student {
-  _id: string;
-  name: string;
-  email: string;
-  // Add more fields as needed
-}
+
 
 const SearchUser = ({ onSelect }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: students, isLoading } = useQuery<Student[]>({
+  const { data: students, isLoading } = useQuery({
     queryKey: ["students"],
-    queryFn: fetchStudents,
+    queryFn: ()=> fetchStudents(),
   });
 
   const filtered = useMemo(() => {

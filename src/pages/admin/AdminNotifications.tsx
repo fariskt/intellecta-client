@@ -141,6 +141,7 @@ const NotificationPanel = ({ onClose }: Props) => {
       setMode("none");
       setSelectedUser(null);
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       console.error("Failed to send notification", error);
       alert("Failed to send notification.");

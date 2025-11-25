@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Card from "./MemoryCard";
-import apple from "../../../../assets/game/apple.png";
-import cherry from "../../../../assets/game/cherry.png";
-import mangosteen from "../../../../assets/game/mangosteen.png";
-import orange from "../../../../assets/game/orange.png";
-import strawberry from "../../../../assets/game/strawberry.png";
-import grape from "../../../../assets/game/grape.png";
+import apple from "/game/apple.png";
+import cherry from "/game/cherry.png";
+import mangosteen from "/game/mangosteen.png";
+import orange from "/game/orange.png";
+import strawberry from "/game/strawberry.png";
+import grape from "/game/grape.png";
 import { RiResetRightFill } from "react-icons/ri";
 import WinScreen from "./WinScreen";
 import { IoMdClose } from "react-icons/io";

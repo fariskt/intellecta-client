@@ -1,4 +1,4 @@
-import QuestionImage from "../../../../assets/game/question-mark.png";
+import QuestionImage from "/game/question-mark.png";
 
 interface CardType {
   src: string;

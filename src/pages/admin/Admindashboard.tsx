@@ -50,21 +50,7 @@ const AdminDashboard = () => {
   })
 
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[75vh]">
-        <AllStudentsLoader />
-      </div>
-    );
-  }
 
-  if (isError) {
-    return (
-      <div className="p-6 text-center text-red-600">
-        Failed to load students. {String(error)}
-      </div>
-    );
-  }
   
 
   return (

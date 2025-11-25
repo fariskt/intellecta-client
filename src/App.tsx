@@ -53,31 +53,37 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
+        <Route path="/games" element={<GamesLayout />}>
+          <Route index element={<GameHome />} />
+          <Route path="myprofile" element={<GameProfile />} />
+          <Route path="allgames" element={<AllGames />} />
+          <Route path="leaderboard" element={<GameLeaderboard />} />
+          <Route path="memory_game" element={<MemoryGame />} />
+          <Route path="word_builder" element={<WordBuilder />} />
+          <Route path="tic_tac_toe" element={<TicTacToe />} />
+          <Route path="geography_quiz" element={<GeographyQuiz />} />
+          <Route path="number_ninja" element={<NumberNinja />} />
+        </Route>
+
         <Route element={<ProtectedUserRoute />}>
-        <Route path="/welcome" element={<WelcomePage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<Programs />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/courses/:category" element={<Courses />} />
-          <Route path="/course/:category/:courseTitle/:id" element={<Lessons />} />
-          <Route path="/lesson/:lessonTitle/:lessonId" element={<LessonContent />}/>
+          <Route
+            path="/course/:category/:courseTitle/:id"
+            element={<Lessons />}
+          />
+          <Route
+            path="/lesson/:lessonTitle/:lessonId"
+            element={<LessonContent />}
+          />
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/course/quiz/:courseId" element={<LessonQuiz />} />
           <Route path="/assessment-results" element={<AssessmentResults />} />
           <Route path="/userdash" element={<UserDashLayout />}></Route>
-
-          <Route path="/games" element={<GamesLayout />}>
-            <Route index element={<GameHome />} />
-            <Route path="myprofile" element={<GameProfile />} />
-            <Route path="allgames" element={<AllGames />} />
-            <Route path="leaderboard" element={<GameLeaderboard />} />
-            <Route path="memory_game" element={<MemoryGame />} />
-            <Route path="word_builder" element={<WordBuilder />} />
-            <Route path="tic_tac_toe" element={<TicTacToe />} />
-            <Route path="geography_quiz" element={<GeographyQuiz />} />
-            <Route path="number_ninja" element={<NumberNinja />} />
-          </Route>
         </Route>
 
         <Route path="/admin_login" element={<AdminLogin />} />
@@ -89,7 +95,10 @@ function App() {
             <Route path="courses" element={<AdminCoursesPage />} />
             <Route path="addCourse" element={<AddCourse />} />
             <Route path="courses/:courseId/edit" element={<EditCourseForm />} />
-            <Route path="courses/:courseId" element={<AdminCourseDetailsPage />} />
+            <Route
+              path="courses/:courseId"
+              element={<AdminCourseDetailsPage />}
+            />
           </Route>
         </Route>
       </Routes>

@@ -121,7 +121,7 @@ const ProfilePage: React.FC = () => {
   return (
     <>
       <NavbarWelcome />
-      <div className="flex justify-center min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e293b] p-4">
+      <div className="flex justify-center min-h-screen pt-16 bg-gradient-to-br from-[#0f172a] to-[#1e293b] p-4">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col w-full max-w-xl h-fit bg-[#0f172a] border border-slate-600 shadow-2xl rounded-3xl p-8 space-y-6 transition-all duration-300"
@@ -168,6 +168,7 @@ const ProfilePage: React.FC = () => {
                 <div className="flex items-center space-x-2 w-2/3">
                   <input
                     type="text"
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     ref={(el: any) => (inputRefs.current[index] = el)}
                     name={field.name}
                     value={field.value}
